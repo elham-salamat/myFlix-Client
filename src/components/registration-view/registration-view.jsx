@@ -8,14 +8,15 @@ export function RegistrationView(props) {
     const [email, setEmail] = useState('');
     const [birthday, setBirthday] = useState('');
     const [nationality, setNationality] = useState('');
+    const [submitted, setSubmitted] = useState(false);
 
 
-    const handleSubmit = (e) => {
+
+    // Handling the form submission
+    const handlesignup = (e) => {
         e.preventDefault();
-        console.log(username, password);
-        /* Send a request to the server for authentication */
-        /* then call props.onLoggedIn(username) */
-        props.onSignUp(user);
+        setSubmitted(true);
+        console.log('elham')
     };
 
     return (
@@ -38,10 +39,10 @@ export function RegistrationView(props) {
                     <form className="signup-form">
                         <input type="text" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
                         <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-                        <input type="email" Placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
+                        <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
                         <input type="datetime" placeholder="Birthday" value={birthday} onChange={e => setBirthday(e.target.value)} />
                         <input type="text" placeholder="Nationality" value={nationality} onChange={e => setNationality(e.target.value)} />
-                        <button type="submit" onClick={handleSubmit}>Sign Up</button>
+                        <button type="submit" onClick={handlesignup}>Sign Up</button>
                     </form>
                 </div>
             </div>

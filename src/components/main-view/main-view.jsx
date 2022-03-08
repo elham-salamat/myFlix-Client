@@ -14,8 +14,8 @@ export class MainView extends React.Component {
             movies: [],
             selectedMovie: null,
             user: null,
-            registrationRequest: null
-            // registrationRequest: 'yes'
+            // registrationRequest: null
+            registrationRequest: 'yes'
         }
     }
 
@@ -31,6 +31,7 @@ export class MainView extends React.Component {
             });
     }
 
+
     setSelectedMovie(newSelectedMovie) {
         this.setState({
             selectedMovie: newSelectedMovie
@@ -40,6 +41,12 @@ export class MainView extends React.Component {
     onLoggedIn(user) {
         this.setState({
             user
+        });
+    }
+
+    onSignUp(newUser) {
+        this.setState({
+            newUser
         });
     }
 
@@ -54,10 +61,9 @@ export class MainView extends React.Component {
         const { movies, selectedMovie, user, registrationRequest } = this.state;
 
         /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
-        if (!user && !registrationRequest) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-        // if (!user && !registrationRequest) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} onSignUp={() => this.setRegisterRequest()} />;
+        // if (!user && !registrationRequest) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
 
-        if (!user && registrationRequest) return <RegistrationView />
+        if (!user && registrationRequest) return <RegistrationView onSignUp={(newUser) => this.onSignUp(newUser)} />
 
         // Before the movies have been loaded
         if (movies.length === 0) return <div className="main-view" />;
