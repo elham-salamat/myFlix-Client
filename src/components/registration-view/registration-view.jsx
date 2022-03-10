@@ -9,6 +9,7 @@ export function RegistrationView(props) {
     const [birthday, setBirthday] = useState('');
     const [nationality, setNationality] = useState('');
     const [submitted, setSubmitted] = useState(false);
+    const [login, setLogin] = useState(false)
 
 
 
@@ -16,7 +17,11 @@ export function RegistrationView(props) {
     const handlesignup = (e) => {
         e.preventDefault();
         setSubmitted(true);
-        console.log('elham')
+    };
+
+    const handlelogin = (e) => {
+        e.preventDefault();
+        console.log(props.onLogin(login));
     };
 
     return (
@@ -48,7 +53,7 @@ export function RegistrationView(props) {
             </div>
             <div className="signup">
                 <h2>Already have an acount</h2>
-                <button className="button" type="submit">Login</button>
+                <button className="button" type="submit" value={login} onClick={handlelogin}>Login</button>
             </div>
         </div>
     )

@@ -5,6 +5,7 @@ import './login-view.scss';
 export function LoginView(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [register, setRegister] = useState(true)
 
     const handlelogin = (e) => {
         e.preventDefault();
@@ -14,9 +15,10 @@ export function LoginView(props) {
         props.onLoggedIn(username);
     };
 
-    // const handlesignup = (e) => {
-    //     console.log('elham');
-    // };
+    const handleregister = (e) => {
+        e.preventDefault();
+        console.log(props.onRegister(register));
+    };
 
     return (
         <div className='login-page'>
@@ -48,8 +50,7 @@ export function LoginView(props) {
             <div className="signup">
                 <h2>New here?</h2>
                 <p>Sign up and enjoy your customize MyFlix</p>
-                <button className="button" type="submit">Sign Up</button>
-                {/* <button className="button" type="submit" onClick={handlesignup}>Sign Up</button> */}
+                <button className="button" type="submit" value={register} onClick={handleregister}>Register</button>
             </div>
         </div>
     )
