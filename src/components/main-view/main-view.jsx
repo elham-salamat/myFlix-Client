@@ -19,8 +19,22 @@ export class MainView extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('https://movie-app-902522.herokuapp.com/movies')
+        let accessToken = localStorage.getItem('token');
+        if (accessToken !== null) {
+            this.setState({
+                user: localStorage.getItem('user')
+            });
+            this.getMovies(accessToken);
+        }
+    }
+
+
+    getMovies(token) {
+        axios.get('https://movie-app-902522.herokuapp.com/movies', {
+            header: { Authorization: `Bearer ${token}` }
+        })
             .then(response => {
+                //Assign the result to the state 
                 this.setState({
                     movies: response.data
                 });
@@ -28,7 +42,6 @@ export class MainView extends React.Component {
             .catch(error => {
                 console.log(error);
             });
-
     }
 
 
@@ -38,10 +51,15 @@ export class MainView extends React.Component {
         });
     }
 
-    onLoggedIn(user) {
+    onLoggedIn(authData) {
+        console.log(authData);
         this.setState({
-            user
+            user: authData.user.Username
         });
+
+        localStorage.setItem('token', authData.token);
+        localStorage.setItem('user', authData.user.Username);
+        // this.getMovies(authData.token);
     }
 
     setRegistrationRequest(registrationRequestState) {
@@ -56,6 +74,8 @@ export class MainView extends React.Component {
     //     });
     // }
 
+
+
     render() {
         const { movies, selectedMovie, user, registrationRequest } = this.state;
 
@@ -69,6 +89,7 @@ export class MainView extends React.Component {
 
         return (
             <div className="main-view">
+
                 {selectedMovie
                     ? <MovieView movieData={selectedMovie} onBackClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie) }} />
                     : movies.map(movie => (

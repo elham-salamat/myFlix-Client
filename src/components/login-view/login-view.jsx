@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 import './login-view.scss';
 
@@ -9,10 +10,20 @@ export function LoginView(props) {
 
     const handlelogin = (e) => {
         e.preventDefault();
-        console.log(username, password);
+        // console.log(username, password);
         /* Send a request to the server for authentication */
         /* then call props.onLoggedIn(username) */
-        props.onLoggedIn(username);
+        axios.post('https://movie-app-902522.herokuapp.com/login', {
+            Username: username,
+            Password: password
+        })
+            .then(response => {
+                const data = response.data;
+                props.onLoggedIn(data);
+            })
+            .catch(error => {
+                console.log('no such user')
+            });
     };
 
     const handleregister = (e) => {
