@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { Form, Button, Card, Container, Row, Col } from 'react-bootstrap';
 
 import './registration-view.scss';
 
 export function RegistrationView(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [repassword, setRepassword] = useState('');
     const [email, setEmail] = useState('');
     const [birthday, setBirthday] = useState('');
     const [nationality, setNationality] = useState('');
@@ -25,36 +27,84 @@ export function RegistrationView(props) {
     };
 
     return (
-        <div className='signup-page'>
-            <div className="main">
-                <h3 className="logo">MyFlix</h3>
-                <div className='content'>
-                    <h1>Register in MyFlix</h1>
-                    <p>Sign up using social networks</p>
-                    <div>
-                        <i className="fa fa-linkedin-square"></i>
-                        <i className="fa fa-google-plus-square"></i>
-                        <i className="fa fa-facebook-square"></i>
-                    </div>
-                    <p>
-                        <span className='line-through'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                        <span>&nbsp;</span><span>OR</span><span>&nbsp;</span>
-                        <span className='line-through'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    </p>
-                    <form className="signup-form">
-                        <input type="text" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
-                        <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-                        <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
-                        <input type="datetime" placeholder="Birthday" value={birthday} onChange={e => setBirthday(e.target.value)} />
-                        <input type="text" placeholder="Nationality" value={nationality} onChange={e => setNationality(e.target.value)} />
-                        <button type="submit" onClick={handlesignup}>Sign Up</button>
-                    </form>
-                </div>
-            </div>
-            <div className="signup">
-                <h2>Already have an acount</h2>
-                <button className="button" type="submit" value={login} onClick={handlelogin}>Login</button>
-            </div>
-        </div>
+        <container>
+            <Row className="justify-content-sm-center">
+                <Col sm={6}>
+                    <Card>
+                        <Card.Body>
+                            <Card.Title>Create an account</Card.Title>
+                            <Card.Subtitle>Sign up using social networks</Card.Subtitle>
+                            <Card.Link href="#"><i className="fa fa-linkedin-square"></i></Card.Link>
+                            <Card.Link href="#"><i className="fa fa-google-plus-square"></i></Card.Link>
+                            <Card.Link href="#"><i className="fa fa-facebook-square"></i></Card.Link>
+                            <Card.Text>OR</Card.Text>
+                            <Form>
+                                <Form.Group controlId="formUsername">
+                                    <Form.Label>Username</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Enter your username"
+                                        value={username}
+                                        onChange={e => setUsername(e.target.value)}
+                                        Required
+                                    />
+                                </Form.Group>
+                                <Form.Group controlId="formEmail">
+                                    <Form.Label>Email</Form.Label>
+                                    <Form.Control
+                                        type="email"
+                                        placeholder="Enter a valid email"
+                                        value={email}
+                                        onChange={e => setEmail(e.target.value)}
+                                        Required
+                                    />
+                                </Form.Group>
+                                <Form.Group controlId="formBirthday">
+                                    <Form.Label>Birthday</Form.Label>
+                                    <Form.Control
+                                        type="datetime"
+                                        placeholder="12.01.1990"
+                                        value={birthday}
+                                        onChange={e => setBirthday(e.target.value)}
+                                        Required
+                                    />
+                                </Form.Group>
+                                <Form.Group controlId="formNationality">
+                                    <Form.Label>Nationality</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="What is your nationality"
+                                        value={nationality}
+                                        onChange={e => setNationality(e.target.value)}
+                                    />
+                                </Form.Group>
+                                <Form.Group controlId="formPassword">
+                                    <Form.Label>Password</Form.Label>
+                                    <Form.Control
+                                        type="password"
+                                        placeholder="Enter your password"
+                                        value={password}
+                                        onChange={e => setPassword(e.target.value)}
+                                    />
+                                </Form.Group>
+                                <Form.Group controlId="formPassword">
+                                    <Form.Label>Re-enter password</Form.Label>
+                                    <Form.Control
+                                        type="password"
+                                        placeholder="Re-enter your password"
+                                        value={repassword}
+                                        onChange={e => setReassword(e.target.value)}
+                                    />
+                                </Form.Group>
+                                <Button type="submit" onClick={handlesignup} variant="outline-secondary">Create an account</Button>
+                            </Form>
+                            <Card.Text>Already have an account?</Card.Text>
+                            <Button type="submit" value={login} onClick={handlelogin} variant="outline-secondary">Login</Button>
+                        </Card.Body>
+                    </Card>
+                </Col >
+            </Row >
+        </container>
+
     )
 }

@@ -1,39 +1,14 @@
-* {
-    box-sizing: border-box;
-}
-
-body {
-    font-size: 18px;
-    margin: 0;
-}
-
-.login-page {
-    display: grid;
-    grid-template-columns: 3fr 1fr;
-    background-color: #fff;
-    height: 100vh;
-}
-
-.main {
-    background-color: inherit;
+.social-media i {
+    font-size: 25px;
+    margin: 10px;
     color: #00004d;
 }
 
-.logo {
-    margin: 0;
-    padding: 15px 20px;
+.custom-card {
+    border-color: #00004d !important;
 }
 
-.content h1 {
-    margin-top: 200px;
-}
-
-.content i {
-    font-size: 28px;
-    margin: 10px;
-}
-
-.content {
+.login {
     text-align: center;
 }
 
@@ -42,32 +17,40 @@ body {
 }
 
 .login-form {
-    max-width: 30%;
-    margin: 20px auto;
+    text-align: left;
 }
 
-form input,
-form button {
-    margin: 5px;
-    width: 100%;
-    padding: 5px;
+.login-form .label {
+    margin-top: 15px;
+    margin-bottom: 5px;
 }
 
-.signup {
-    background-color: #00004d;
-    color: #fff;
-    text-align: center;
+Form.button {
+    margin-top: 50px !important;
 }
 
-.signup h2 {
-    margin: 350px auto 20px auto;
-}
-
-// @media screen and (max-width: 500px) {
-
-//     .login-page {
-//         display: grid;
-//         grid-template-columns: 1fr;
-//     }
-
+// form input,
+// form button {
+//     margin: 5px;
+//     width: 100%;
+//     padding: 5px;
 // }
+
+// .signup {
+//     background-color: #00004d;
+//     color: #fff;
+//     text-align: center;
+// }
+
+// .signup h2 {
+//     margin: 350px auto 20px auto;
+// }
+
+// // @media screen and (max-width: 500px) {
+
+// //     .login-page {
+// //         display: grid;
+// //         grid-template-columns: 1fr;
+// //     }
+
+// // }
