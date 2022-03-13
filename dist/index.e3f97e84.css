@@ -1,0 +1,42 @@
+.movie-poster {
+  width: 100%;
+  height: 25vw;
+  object-fit: cover;
+}
+
+
+.social-media i {
+  font-size: 25px;
+  margin: 10px;
+  color: #00004d;
+}
+
+.custom-card {
+  border-color: #00004d !important;
+}
+
+.login {
+  text-align: center;
+}
+
+.line-through {
+  text-decoration: line-through;
+}
+
+.login-form {
+  text-align: left;
+}
+
+.login-form .label {
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+Form.button {
+  margin-top: 50px !important;
+}
+
+.main {
+  color: #00004d;
+}
+/*# sourceMappingURL=index.e3f97e84.css.map */

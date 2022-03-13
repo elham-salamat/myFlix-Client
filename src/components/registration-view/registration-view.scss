@@ -1,64 +1,64 @@
-* {
-    box-sizing: border-box;
-}
+// * {
+//     box-sizing: border-box;
+// }
 
-body {
-    font-size: 18px;
-    margin: 0;
-}
+// body {
+//     font-size: 18px;
+//     margin: 0;
+// }
 
-.signup-page {
-    display: grid;
-    grid-template-columns: 3fr 1fr;
-    background-color: #fff;
-    height: 100vh;
-}
+// .signup-page {
+//     display: grid;
+//     grid-template-columns: 3fr 1fr;
+//     background-color: #fff;
+//     height: 100vh;
+// }
 
-.main {
-    background-color: inherit;
-    color: #00004d;
-}
+// .main {
+//     background-color: inherit;
+//     color: #00004d;
+// }
 
-.logo {
-    margin: 0;
-    padding: 15px 20px;
-}
+// .logo {
+//     margin: 0;
+//     padding: 15px 20px;
+// }
 
-.content {
-    text-align: center;
-}
+// .content {
+//     text-align: center;
+// }
 
-.content h1 {
-    margin-top: 150px;
-}
+// .content h1 {
+//     margin-top: 150px;
+// }
 
-.content i {
-    font-size: 28px;
-    margin: 10px;
-}
+// .content i {
+//     font-size: 28px;
+//     margin: 10px;
+// }
 
-.line-through {
-    text-decoration: line-through;
-}
+// .line-through {
+//     text-decoration: line-through;
+// }
 
-.signup-form {
-    max-width: 30%;
-    margin: 20px auto;
-}
+// .signup-form {
+//     max-width: 30%;
+//     margin: 20px auto;
+// }
 
-form input,
-form button {
-    margin: 5px;
-    width: 100%;
-    padding: 5px;
-}
+// form input,
+// form button {
+//     margin: 5px;
+//     width: 100%;
+//     padding: 5px;
+// }
 
-.login {
-    background-color: #00004d;
-    color: #fff;
-    text-align: center;
-}
+// .login {
+//     background-color: #00004d;
+//     color: #fff;
+//     text-align: center;
+// }
 
-.login h2 {
-    margin: 350px auto 20px auto;
-}
+// .login h2 {
+//     margin: 350px auto 20px auto;
+// }
