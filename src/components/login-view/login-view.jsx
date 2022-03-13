@@ -6,24 +6,49 @@ import './login-view.scss';
 export function LoginView(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [register, setRegister] = useState(true)
+    const [usernameErr, setUsernameErr] = useState('');
+    const [passwordErr, setPasswordErr] = useState('');
+    const [register, setRegister] = useState(true);
+
+    //validate user inputs
+    const validate = () => {
+        let isReq = true;
+
+        if (!username) {
+            setUsernameErr('username Required');
+            isReq = false;
+        } else if (username.length < 3) {
+            setUsernameErr('Username must be at least 3 character!');
+            isReq = false;
+        }
+
+        if (!password) {
+            setPasswordErr('Password Required');
+            isReq = false;
+        } else if (password.length < 6) {
+            setPasswordErr('password must be at least 6 characters');
+            isReq = false;
+        }
+
+        return isReq
+    }
 
     const handlelogin = (e) => {
         e.preventDefault();
-        // console.log(username, password);
-        /* Send a request to the server for authentication */
-        /* then call props.onLoggedIn(username) */
-        axios.post('https://movie-app-902522.herokuapp.com/login', {
-            Username: username,
-            Password: password
-        })
-            .then(response => {
-                const data = response.data;
-                props.onLoggedIn(data);
+        const isReq = validate();
+        if (isReq) {
+            axios.post('https://movie-app-902522.herokuapp.com/login', {
+                Username: username,
+                Password: password
             })
-            .catch(error => {
-                console.log('no such user')
-            });
+                .then(response => {
+                    const data = response.data;
+                    props.onLoggedIn(data);
+                })
+                .catch(error => {
+                    console.log('no such user')
+                });
+        }
     };
 
     const handleregister = (e) => {
@@ -50,7 +75,11 @@ export function LoginView(props) {
                     </p>
                     <form className="login-form">
                         <input type="text" value={username} placeholder="Username" onChange={e => setUsername(e.target.value)} />
+                        {/* code added here to display validation error */}
+                        {usernameErr && <p>{usernameErr}</p>}
                         <input type="password" value={password} placeholder="Password" onChange={e => setPassword(e.target.value)} />
+                        {/* code added here to display validation error */}
+                        {passwordErr && <p>{passwordErr}</p>}
                         <button className="button" type="submit" onClick={handlelogin}>Login</button>
                     </form>
                     <a href="#" className="password-reset">Forget your password?</a>

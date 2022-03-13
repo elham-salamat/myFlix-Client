@@ -31,13 +31,16 @@ export class MainView extends React.Component {
 
     getMovies(token) {
         axios.get('https://movie-app-902522.herokuapp.com/movies', {
-            header: { Authorization: `Bearer ${token}` }
+            headers: { Authorization: `Bearer ${token}` }
         })
             .then(response => {
                 //Assign the result to the state 
                 this.setState({
                     movies: response.data
+                }, () => {
+                    console.log(this.state.movies);
                 });
+
             })
             .catch(error => {
                 console.log(error);
@@ -59,7 +62,7 @@ export class MainView extends React.Component {
 
         localStorage.setItem('token', authData.token);
         localStorage.setItem('user', authData.user.Username);
-        // this.getMovies(authData.token);
+        this.getMovies(authData.token);
     }
 
     setRegistrationRequest(registrationRequestState) {
@@ -74,6 +77,13 @@ export class MainView extends React.Component {
     //     });
     // }
 
+    onLoggedOut() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        this.setState({
+            user: null
+        });
+    }
 
 
     render() {
@@ -89,14 +99,15 @@ export class MainView extends React.Component {
 
         return (
             <div className="main-view">
-
-                {selectedMovie
-                    ? <MovieView movieData={selectedMovie} onBackClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie) }} />
-                    : movies.map(movie => (
-                        <MovieCard key={movie._id} movieData={movie} onMovieClick={(movie) => { this.setSelectedMovie(movie) }} />
-                    ))
+                <button onClick={() => { this.onLoggedOut() }}>logout</button>
+                {
+                    selectedMovie
+                        ? <MovieView movieData={selectedMovie} onBackClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie) }} />
+                        : movies.map(movie => (
+                            <MovieCard key={movie._id} movieData={movie} onMovieClick={(movie) => { this.setSelectedMovie(movie) }} />
+                        ))
                 }
-            </div>
+            </div >
         );
     }
 }
