@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Card, Col, Row, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
@@ -8,7 +9,8 @@ import './movie-view.scss';
 export class MovieView extends React.Component {
 
     render() {
-        const { movieData, onBackClick } = this.props;
+        const { movieData, onAddClick } = this.props;
+
         return (
             <Row>
                 <Col sm={12} md={5}>
@@ -24,19 +26,27 @@ export class MovieView extends React.Component {
                             <Card.Text><strong>Description: </strong>{movieData.Description}</Card.Text>
                             <Card.Text><strong>Country: </strong> {movieData.Country}</Card.Text>
                             <Card.Text><strong>Directed by: </strong>
-                                <Card.Link>{movieData.Director.Name}</Card.Link>
+                                <Link to={`/directors/${movieData.Director.Name}`}>
+                                    {movieData.Director.Name}
+                                </Link>
                             </Card.Text>
                             <Card.Text><strong>Genre: </strong>
-                                <Card.Link>{movieData.Genre.Name}</Card.Link>
+                                <Link to={`/Genres/${movieData.Genre.Name}`}>
+                                    {movieData.Genre.Name}
+                                </Link>
                             </Card.Text>
                             <Card.Text><strong>Rating: </strong>{movieData.Rating}</Card.Text>
 
-                            <Button className="button" onClick={() => { onBackClick(null); }}>Back</Button>
-                            <Button className="button">Add to my favorites</Button>
+                            <Button variant="outline-primary">
+                                <Link to="/">Back</Link>
+                            </Button>
+
+
+                            <Button onClick={() => { onAddClick(); }} variant="outline-primary">Add to my favorites</Button>
                         </Card.Body>
                     </Card>
                 </Col>
-            </Row>
+            </Row >
         );
     }
 }
@@ -61,6 +71,6 @@ MovieView.propTypes = {
             DeathYear: PropTypes.number,
         })
     }).isRequired,
-    onBackClick: PropTypes.func.isRequired
+
 }
 

@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { Form, Button, Card, Container, Row, Col } from 'react-bootstrap';
 
 import './login-view.scss';
+import { HeaderView } from '../header-view/header-view';
 
 export function LoginView(props) {
     const [username, setUsername] = useState('');
@@ -49,12 +52,6 @@ export function LoginView(props) {
                     console.log('no such user')
                 });
         }
-    };
-
-    const handleregister = (e) => {
-        console.log(register);
-        e.preventDefault();
-        console.log(props.onRegister(register));
     };
 
     return (
@@ -106,10 +103,14 @@ export function LoginView(props) {
             </Row>
             <Row className="justify-content-sm-center">
                 <Col sm={12} md={6}>
-                    <Button type="submit" value={register} onClick={handleregister} variant="outline-secondary">Register</Button>
+                    <Button variant="outline-secondary">
+                        <Link to="/register">
+                            Register
+                        </Link>
+                    </Button>
                 </Col>
             </Row >
-        </Col>
+        </Col >
     )
 }
 

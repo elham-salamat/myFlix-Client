@@ -1,4 +1,6 @@
+import axios from 'axios';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Form, Button, Card, Container, Row, Col } from 'react-bootstrap';
 
 import './registration-view.scss';
@@ -6,11 +8,11 @@ import './registration-view.scss';
 export function RegistrationView(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [repassword, setRepassword] = useState('');
+    // const [repassword, setRepassword] = useState('');
     const [email, setEmail] = useState('');
     const [birthday, setBirthday] = useState('');
     const [nationality, setNationality] = useState('');
-    const [submitted, setSubmitted] = useState(false);
+    // const [submitted, setSubmitted] = useState(false);
     const [login, setLogin] = useState(false)
 
 
@@ -18,16 +20,26 @@ export function RegistrationView(props) {
     // Handling the form submission
     const handlesignup = (e) => {
         e.preventDefault();
-        setSubmitted(true);
-    };
-
-    const handlelogin = (e) => {
-        e.preventDefault();
-        console.log(props.onLogin(login));
+        // setSubmitted(true);
+        axios.post('https://movie-app-902522.herokuapp.com/users', {
+            Username: username,
+            Password: password,
+            Email: email,
+            Birthday: birthday,
+            Nationality: nationality
+        })
+            .then(response => {
+                const data = response.data;
+                console.log(data);
+                window.open('/', '_self');
+            })
+            .catch(error => {
+                console.log('error registering the user')
+            });
     };
 
     return (
-        <container>
+        <Container>
             <Row className="justify-content-sm-center">
                 <Col sm={6}>
                     <Card>
@@ -87,7 +99,7 @@ export function RegistrationView(props) {
                                         onChange={e => setPassword(e.target.value)}
                                     />
                                 </Form.Group>
-                                <Form.Group controlId="formPassword">
+                                {/* <Form.Group controlId="formPassword">
                                     <Form.Label>Re-enter password</Form.Label>
                                     <Form.Control
                                         type="password"
@@ -95,16 +107,19 @@ export function RegistrationView(props) {
                                         value={repassword}
                                         onChange={e => setReassword(e.target.value)}
                                     />
-                                </Form.Group>
+                                </Form.Group> */}
                                 <Button type="submit" onClick={handlesignup} variant="outline-secondary">Create an account</Button>
                             </Form>
                             <Card.Text>Already have an account?</Card.Text>
-                            <Button type="submit" value={login} onClick={handlelogin} variant="outline-secondary">Login</Button>
+                            <Button variant="outline-secondary">
+                                <Link to="/">
+                                    Log in
+                                </Link>
+                            </Button>
                         </Card.Body>
                     </Card>
                 </Col >
             </Row >
-        </container>
-
+        </Container>
     )
 }
