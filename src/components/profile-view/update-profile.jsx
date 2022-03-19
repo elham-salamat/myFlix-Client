@@ -36,6 +36,7 @@ export function UpdateForm({ user }) {
         })
             .then(response => {
                 alert('your info updated successfuly');
+
             })
             .catch(error => {
                 console.log('error updating the user');

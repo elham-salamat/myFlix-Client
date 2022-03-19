@@ -74,6 +74,7 @@ export function LoginView(props) {
                                         value={username}
                                         onChange={e => setUsername(e.target.value)}
                                     />
+                                    {usernameErr && <p>{usernameErr}</p>}
                                 </Form.Group>
                                 <Form.Group controlId="formPassword">
                                     <Form.Label className="label">Password</Form.Label>
@@ -83,6 +84,7 @@ export function LoginView(props) {
                                         value={password}
                                         onChange={e => setPassword(e.target.value)}
                                     />
+                                    {passwordErr && <p>{passwordErr}</p>}
                                 </Form.Group>
                                 <Button className="button" type="submit" onClick={handlelogin}>Login</Button>
                             </Form>

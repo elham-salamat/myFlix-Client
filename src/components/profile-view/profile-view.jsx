@@ -58,11 +58,6 @@ export function ProfileView(props) {
                         </Card.Body>
                     </Col>
                 </Card>
-                <Button variant="outline-secondary">
-                    <Link to="/profile/edit">
-                        Edit profile
-                    </Link>
-                </Button>
                 <Button onClick={handledeleteaccount} variant="outline-secondary">
                     <Link to="/">
                         Delete Account
