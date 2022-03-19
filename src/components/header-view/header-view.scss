@@ -1,0 +1,26 @@
+.header {
+    position: relative;
+    background-color: #fff;
+
+    nav {
+        position: absolute;
+    }
+
+    a {
+        margin: 5px auto auto 15px;
+
+        img {
+            width: 60px;
+            height: 50px;
+        }
+    }
+
+    .nav-item a {
+        text-decoration: none;
+        font-size: 18px;
+        color: #00004d;
+    }
+
+
+
+}

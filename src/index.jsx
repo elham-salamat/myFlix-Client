@@ -14,7 +14,7 @@ import './index.scss';
 class MyFlixApplication extends React.Component {
     render() {
         return (
-            <Container className="main">
+            <Container>
                 <MainView />
             </Container>
         );

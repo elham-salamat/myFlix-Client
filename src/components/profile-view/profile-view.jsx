@@ -3,13 +3,14 @@ import { Link } from 'react-router-dom';
 import { Col, Row, Card, Button } from 'react-bootstrap';
 import axios from 'axios';
 
-import { MovieCard } from '../movie-card/movie-card1';
+import { FavoriteMovies } from './favorit-movies';
+import { UpdateForm } from './update-profile';
 
 export function ProfileView(props) {
 
     const user = props.userData;
-    console.log(props.movieData);
-    console.log(user);
+    // console.log(props.movieData);
+    // console.log(user.FavoriteMovies);
 
     const handledeleteaccount = (e) => {
         e.preventDefault();
@@ -28,40 +29,52 @@ export function ProfileView(props) {
             });
     };
 
-    // for (const movieId of user.FavoriteMovies) {
-    //     if (movieId === props.movieData._id) {
-    //         console.log()
-    //     }
+    // for (let i = 0; i < user.FavoriteMovies.length; i++) {
+    //     console.log(user.FavoriteMovies[i]);
     // }
+
+    // for (let element of user.FavoriteMovies) {
+    //     console.log(element);
+    // }
+
+    let favoriteMovies = props.movieData.filter((movie) => user.FavoriteMovies.includes(movie._id));
+
+    console.log(favoriteMovies);
 
 
     return (
-        <Row>
-            <Card>
-                <Col>
-                    <Card.Img src="http://via.placeholder.com/200x70" />
-                </Col>
-                <Col>
-                    <Card.Body>
-                        <Card.Title>{user.Username}</Card.Title>
-                        <Card.Title>{user.Email}</Card.Title>
-                        <Card.Title>{user.Nationality}</Card.Title>
-                        <Card.Title>{user.Birthday}</Card.Title>
-                    </Card.Body>
-                </Col>
-            </Card>
-            <Button variant="outline-secondary">
-                <Link to="/profile/edit">
-                    Edit profile
-                </Link>
-            </Button>
-            <Button onClick={handledeleteaccount} variant="outline-secondary">
-                <Link to="/">
-                    Delete Account
-                </Link>
-            </Button>
-            {/* <MovieCard favoritMovies={user.FavoritMovies} /> */}
-        </Row>
+        <>
+            <Row>
+                <Card>
+                    <Col>
+                        <Card.Img src="http://via.placeholder.com/200x70" />
+                    </Col>
+                    <Col>
+                        <Card.Body>
+                            <Card.Title>{user.Username}</Card.Title>
+                            <Card.Title>{user.Email}</Card.Title>
+                            <Card.Title>{user.Nationality}</Card.Title>
+                            <Card.Title>{user.Birthday}</Card.Title>
+                        </Card.Body>
+                    </Col>
+                </Card>
+                <Button variant="outline-secondary">
+                    <Link to="/profile/edit">
+                        Edit profile
+                    </Link>
+                </Button>
+                <Button onClick={handledeleteaccount} variant="outline-secondary">
+                    <Link to="/">
+                        Delete Account
+                    </Link>
+                </Button>
+                {/* <MovieCard favoritMovies={user.FavoritMovies} /> */}
+            </Row>
+            <UpdateForm user={user} />
+
+            <FavoriteMovies favoriteMovies={favoriteMovies} />
+        </>
 
     )
+
 }

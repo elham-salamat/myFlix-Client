@@ -1,5 +1,6 @@
 import React from 'react';
-import { Card, Row, Col, Navbar, Nav, Container, Button } from 'react-bootstrap';
+import { Row, Col, Navbar, Nav, Button } from 'react-bootstrap';
+import NavbarCollapse from 'react-bootstrap/esm/NavbarCollapse';
 import { Link } from 'react-router-dom';
 
 import logo from './img/logo.jpg';
@@ -15,40 +16,49 @@ export function HeaderView(props) {
 
     if (props.isAuth) {
         return (
-            <Row className="justify-content-md-center">
-                <Col>
-                    <img className="logo" src={logo} />
-
-                    <Navbar>
-                        <Container>
-                            <Navbar.Text>
-                                <Link to="/">
-                                    <Button variant="link">Home</Button>
-                                </Link>
-                            </Navbar.Text>
-                            <Navbar.Text>
-                                <Link to="/profile">
-                                    <Button variant="link">{props.username}</Button>
-                                </Link>
-                            </Navbar.Text>
-                            <Navbar.Text>
-                                <Link to="/">
-                                    <Button onClick={handlesignout} variant="link">Sign out</Button>
-                                </Link>
-                            </Navbar.Text>
-                        </Container>
-                    </Navbar>
-                </Col>
-            </Row>
+            <Col className="header" xs={12} md={10} lg={6}>
+                <Navbar collapseOnSelect expand="lg" fixed="top" >
+                    <Navbar.Brand href="/">
+                        <img
+                            className="align-top"
+                            src={logo}
+                            alt="logo"
+                        />
+                    </Navbar.Brand>
+                    <Navbar.Toggle aria-controls="offcanvasNavbar" />
+                    <Navbar.Collapse className="justify-content-end" id="responsive-navbar-nav">
+                        <Nav className="nav">
+                            <Nav.Item>
+                                <Link to="/">Home</Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Link to="/profile">{props.username}</Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Link onClick={handlesignout} to="/">Sign out</Link>
+                            </Nav.Item>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Navbar>
+            </Col >
         )
     }
 
     return (
-        <Row className="justify-content-md-center">
-            <Col>
-                <img className="logo" src={logo} />
-            </Col>
-        </Row>
+        <Col className="header" xs={12} md={8} lg={6}>
+            <Navbar className="justify-content-center" collapseOnSelect expand="lg" bg="light" variant="light" fixed="top">
+                <Navbar.Brand href="/">
+                    <img
+                        className="d-inline-block align-top"
+                        src={logo}
+                        alt="logo"
+                        width="60"
+                        height="50"
+                    />
+                </Navbar.Brand>
+            </Navbar>
+        </Col>
+
     )
 
 
