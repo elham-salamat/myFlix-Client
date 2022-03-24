@@ -21,6 +21,7 @@ export function RegistrationView(props) {
     const handlesignup = (e) => {
         e.preventDefault();
         // setSubmitted(true);
+
         axios.post('https://movie-app-902522.herokuapp.com/users', {
             Username: username,
             Password: password,

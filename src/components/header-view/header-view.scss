@@ -1,4 +1,5 @@
 .header {
+    height: 90px;
     position: relative;
     background-color: #fff;
 
@@ -20,7 +21,12 @@
         font-size: 18px;
         color: #00004d;
     }
+}
 
 
 
+.header-logo {
+    height: 90px;
+    background-color: #fff;
+    margin: 10px auto;
 }

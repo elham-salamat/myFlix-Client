@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { Form, Button, Card, Row, Col } from 'react-bootstrap';
+import { Form, Button, Card, Col } from 'react-bootstrap';
 
-// import './profile-view.scss'; 
+import './profile-view.scss';
 
 export function UpdateForm({ user }) {
 
@@ -12,19 +12,15 @@ export function UpdateForm({ user }) {
     const [birthday, setBirthday] = useState(`${user.Birthday} `);
     const [nationality, setNationality] = useState(`${user.Nationality} `);
 
-
-
     // Handling the form submission
     const handleupdate = (e) => {
         e.preventDefault();
         let token = localStorage.getItem('token');
         let currentUsername = localStorage.getItem('user');
 
-
-        // setSubmitted(true);
         axios.put(`https://movie-app-902522.herokuapp.com/users/${currentUsername}`, {
             Username: username,
-            Password: password,
+            Password: 928582101,
             Email: email,
             Birthday: birthday,
             Nationality: nationality
@@ -32,11 +28,9 @@ export function UpdateForm({ user }) {
             headers: {
                 Authorization: `Bearer ${token}`,
             }
-
         })
             .then(response => {
                 alert('your info updated successfuly');
-
             })
             .catch(error => {
                 console.log('error updating the user');
@@ -44,10 +38,10 @@ export function UpdateForm({ user }) {
     };
 
     return (
-        <Col className="update" xs={12} md={8}>
+        <Col className="update" xs={12} md={12}>
             <Card>
+                <Card.Title>Update Your Information</Card.Title>
                 <Card.Body>
-                    <Card.Title>update your informatio</Card.Title>
                     <Form>
                         <Form.Group controlId="formUsername">
                             <Form.Label>Username</Form.Label>
@@ -94,7 +88,6 @@ export function UpdateForm({ user }) {
                                 onChange={e => setPassword(e.target.value)}
                             />
                         </Form.Group>
-
                         <Button type="submit" onClick={handleupdate} variant="outline-secondary">update</Button>
                     </Form>
                 </Card.Body >

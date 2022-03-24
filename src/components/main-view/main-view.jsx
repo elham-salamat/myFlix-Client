@@ -110,6 +110,11 @@ export class MainView extends React.Component {
 
     }
 
+    getUpdatedFavorites() {
+        let token = localStorage.getItem('token');
+        this.getUser(token);
+    }
+
     onLoggedOut() {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
@@ -148,7 +153,7 @@ export class MainView extends React.Component {
                             if (movies.length === 0) return <div className="main-view" />
 
                             return movies.map(m => (
-                                <Col sm={12} md={3} key={m._id}>
+                                <Col xs={12} md={3} key={m._id}>
                                     <MovieCard movieData={m} />
                                 </Col>
                             ))
@@ -163,8 +168,9 @@ export class MainView extends React.Component {
 
                         <Route exact path="/movies/:movieId" render={({ match, history }) => {
                             if (!user) return <Redirect to="/" />
-                            return <Col sm={12} md={8}>
-                                <MovieView movieData={movies.find(m => m._id === match.params.movieId)}
+                            return <Col xs={12} md={8}>
+                                <MovieView
+                                    movieData={movies.find(m => m._id === match.params.movieId)}
                                     onAddClick={() => { this.addToFavorite(match.params.movieId); }}
                                     onBackClick={() => history.goBack()}
                                 />
@@ -174,7 +180,7 @@ export class MainView extends React.Component {
                         <Route exact path="/Directors/:name" render={({ match, history }) => {
                             if (!user) return <Redirect to="/" />
                             if (movies.length === 0) return <div className="main-view" />;
-                            return <Col sm={12} md={8}>
+                            return <Col xs={12} md={8}>
                                 <DirectorView directorData={movies.find(m => m.Director.Name === match.params.name).Director} onBackClic={() => history.goBack()} />
                             </Col>
                         }} />
@@ -182,15 +188,20 @@ export class MainView extends React.Component {
                         <Route exact path="/Genres/:name" render={({ match, history }) => {
                             if (!user) return <Redirect to="/" />
                             if (movies.length === 0) return <div className="main-view" />;
-                            return <Col sm={12} md={8}>
+                            return <Col xs={12} md={8}>
                                 <GenreView Genre={movies.find(m => m.Genre.Name === match.params.name).Genre} onBackClick={() => history.goBack()} />
                             </Col>
                         }} />
 
                         <Route exact path="/profile" render={({ history }) => {
                             if (!user) return <Redirect to="/" />
-                            return <Col sm={12} md={8}>
-                                <ProfileView userData={userData} movieData={movies} onDelete={() => this.onLoggedOut()} onBackClick={() => history.goBack()} />
+                            return <Col xs={12} md={8}>
+                                <ProfileView
+                                    userData={userData}
+                                    movieData={movies}
+                                    onDelete={() => this.onLoggedOut()}
+                                    onBackClick={() => history.goBack()}
+                                />
                             </Col>
                         }} />
                     </Row>

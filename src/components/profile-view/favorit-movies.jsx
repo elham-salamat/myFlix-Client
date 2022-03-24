@@ -1,25 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Col, Row, Button, Figure } from 'react-bootstrap';
 import axios from 'axios';
 
-export function FavoriteMovies({ favoriteMovies }) {
+import './profile-view.scss';
+
+export function FavoriteMovies({ user, movieData }) {
+
+    const [favoriteMovies, setFavoriteMovies] = useState(movieData.filter((movie) => user.FavoriteMovies.includes(movie._id)));
 
     function handleMyFavotite(movieId) {
-        console.log(movieId);
+
         let token = localStorage.getItem('token');
         let username = localStorage.getItem('user');
 
         axios.delete(`https://movie-app-902522.herokuapp.com/users/${username}/${movieId}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
-
             }
         })
             .then(response => {
-                //Assign the result to the state 
-                console.log('deleted successfuly');
-                console.log(response.data);
+                alert('Are you sure about deleting this movie?');
+                let currentFavorites = response.data.FavoriteMovies;
+                setFavoriteMovies(movieData.filter((movie) => currentFavorites.includes(movie._id)));
             })
             .catch(error => {
                 console.log(error);
@@ -29,15 +32,14 @@ export function FavoriteMovies({ favoriteMovies }) {
     return (
         <>
             <Row>
-                <Col>
+                <Col sm={12} md={6} lg={4}>
                     <h4>Favorite movies</h4>
                 </Col>
             </Row>
             <Row>
-
                 {favoriteMovies.map((movie) => {
                     return (
-                        <Col key={movie._id}>
+                        <Col className="fav-movie" sm={12} md={6} lg={4} key={movie._id}>
                             <Link to={`/movies/${movie._id}`}>
                                 <Figure>
                                     <Figure.Image src={movie.ImagePath} />
@@ -51,7 +53,6 @@ export function FavoriteMovies({ favoriteMovies }) {
                     )
                 }
                 )}
-
             </Row >
         </>
     )

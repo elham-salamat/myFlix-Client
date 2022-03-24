@@ -45,15 +45,13 @@ export function HeaderView(props) {
     }
 
     return (
-        <Col className="header" xs={12} md={8} lg={6}>
-            <Navbar className="justify-content-center" collapseOnSelect expand="lg" bg="light" variant="light" fixed="top">
+        <Col className="header-logo" xs={12} md={8} lg={6}>
+            <Navbar className="justify-content-center" collapseOnSelect expand="lg" fixed="top">
                 <Navbar.Brand href="/">
                     <img
-                        className="d-inline-block align-top"
                         src={logo}
                         alt="logo"
-                        width="60"
-                        height="50"
+
                     />
                 </Navbar.Brand>
             </Navbar>
