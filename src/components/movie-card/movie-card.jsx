@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Button, Col } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 import './movie-card.scss';
@@ -15,7 +15,7 @@ export class MovieCard extends React.Component {
                         {movieData.Title}
                     </Card.Title>
                     <Card.Text>
-                        {movieData.Description}
+                        {movieData.Description.substr(0, 65)}
                     </Card.Text>
                     <Link to={`/movies/${movieData._id}`}>
                         <Button variant="link">Read More!</Button>

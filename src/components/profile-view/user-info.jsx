@@ -15,7 +15,7 @@ export function PersonalInfo({ user }) {
     if (dd < 10) dd = '0' + dd;
     if (mm < 10) mm = '0' + mm;
 
-    const userBirthday = dd + '/' + mm + '/' + yyyy;
+    const userBirthday = mm + '/' + dd + '/' + yyyy;
 
     const handledeleteaccount = (e) => {
         e.preventDefault();

@@ -127,8 +127,6 @@ export class MainView extends React.Component {
 
     }
 
-
-
     render() {
         const { movies, user, isAuth, userData } = this.state;
 
@@ -137,9 +135,9 @@ export class MainView extends React.Component {
                 <>
                     <Row className="justify-content-md-center">
                         <HeaderView isAuth={isAuth} username={user} onSignedOut={() => this.onLoggedOut()} />
-                        {/* <HeaderView onSignedOut={() => this.onLoggedOut()} /> */}
+
                     </Row>
-                    <Row className="main-content justify-content-md-center">
+                    <Row className="main-content">
 
                         <Route exact path="/" render={() => {
                             /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
@@ -153,7 +151,7 @@ export class MainView extends React.Component {
                             if (movies.length === 0) return <div className="main-view" />
 
                             return movies.map(m => (
-                                <Col xs={12} md={3} key={m._id}>
+                                <Col className="film-card" xs={12} md={3} key={m._id}>
                                     <MovieCard movieData={m} />
                                 </Col>
                             ))
