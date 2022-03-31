@@ -5,22 +5,22 @@ import { Form, Button, Card, Col } from 'react-bootstrap';
 import './profile-view.scss';
 
 export function UpdateForm({ user }) {
-    const date = new Date(user.Birthday);
-    const yyyy = date.getFullYear();
-    let mm = date.getMonth() + 1; // Months start at 0!
-    let dd = date.getDate();
+    // const date = new Date(user.Birthday);
+    // const yyyy = date.getFullYear();
+    // let mm = date.getMonth() + 1; // Months start at 0!
+    // let dd = date.getDate();
 
-    if (dd < 10) dd = '0' + dd;
-    if (mm < 10) mm = '0' + mm;
+    // if (dd < 10) dd = '0' + dd;
+    // if (mm < 10) mm = '0' + mm;
 
-    const userBirthday = mm + '-' + dd + '-' + yyyy;
+    // const userBirthday = mm + '-' + dd + '-' + yyyy;
 
-    console.log(userBirthday)
+    // console.log(userBirthday)
 
     const [username, setUsername] = useState(`${user.Username}`);
     // const [password, setPassword] = useState(`${user.Password}`);
     const [email, setEmail] = useState(`${user.Email} `);
-    const [birthday, setBirthday] = useState(`${userBirthday} `);
+    const [birthday, setBirthday] = useState(`${user.Birthday} `);
     const [nationality, setNationality] = useState(`${user.Nationality} `);
     const [password, setPassword] = useState(928582101);
 

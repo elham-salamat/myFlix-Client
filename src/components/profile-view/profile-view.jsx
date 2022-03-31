@@ -10,6 +10,7 @@ import './profile-view.scss';
 export function ProfileView(props) {
 
     const user = props.userData;
+    // console.log(user);
 
     return (
         <>
@@ -21,7 +22,7 @@ export function ProfileView(props) {
                     <UpdateForm user={user} />
                 </Col>
             </Row>
-            <FavoriteMovies user={user} movieData={props.movieData} />
+            <FavoriteMovies user={user} movies={props.movies} />
         </>
     )
 }

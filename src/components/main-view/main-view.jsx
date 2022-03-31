@@ -1,11 +1,16 @@
 import React from 'react';
 import axios from 'axios';
+
+import { connect } from 'react-redux';
+
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 
+import { setMovies } from '../../actions/actions';
+
 import { RegistrationView } from '../registration-view/registration-view';
 import { LoginView } from '../login-view/login-view';
-import { MovieCard } from '../movie-card/movie-card';
+import MoviesList from '../movies-list/movies-list';
 import { MovieView } from '../movie-view/movie-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
@@ -14,14 +19,12 @@ import { ProfileView } from '../profile-view/profile-view';
 
 import './main-view.scss';
 
-
-export class MainView extends React.Component {
+class MainView extends React.Component {
 
     constructor() {
         super();
         this.state = {
             userData: {},
-            movies: [],
             user: null,
             isAuth: false
         }
@@ -33,9 +36,7 @@ export class MainView extends React.Component {
         })
             .then(response => {
                 //Assign the result to the state 
-                this.setState({
-                    movies: response.data
-                });
+                this.props.setMovies(response.data);
                 this.setState({
                     isAuth: true
                 });
@@ -64,6 +65,7 @@ export class MainView extends React.Component {
             });
     }
 
+
     componentDidMount() {
         let accessToken = localStorage.getItem('token');
 
@@ -78,6 +80,7 @@ export class MainView extends React.Component {
             this.getUser(accessToken);
         }
     }
+
 
     onLoggedIn(authData) {
         this.setState({
@@ -128,14 +131,15 @@ export class MainView extends React.Component {
     }
 
     render() {
-        const { movies, user, isAuth, userData } = this.state;
+        let { movies } = this.props;
+        let { user, isAuth, userData } = this.state;
+
 
         return (
             <Router>
                 <>
                     <Row className="justify-content-md-center">
                         <HeaderView isAuth={isAuth} username={user} onSignedOut={() => this.onLoggedOut()} />
-
                     </Row>
                     <Row className="main-content">
 
@@ -148,19 +152,18 @@ export class MainView extends React.Component {
                             )
 
                             // Before the movies have been loaded
-                            if (movies.length === 0) return <div className="main-view" />
+                            if (movies.length === 0) return <div className="main-view" />;
 
-                            return movies.map(m => (
-                                <Col className="film-card" xs={12} md={3} key={m._id}>
-                                    <MovieCard movieData={m} />
-                                </Col>
-                            ))
+                            return <MoviesList movies={movies} />;
                         }} />
 
                         <Route exact path="/register" render={() => {
                             if (user) return <Redirect to="/" />
                             return (
-                                <RegistrationView onSignUp={(newUser) => this.onSignUp(newUser)} onLogin={registrationRequestState => this.setRegistrationRequest(registrationRequestState)} />
+                                <RegistrationView
+                                    onSignUp={(newUser) => this.onSignUp(newUser)}
+                                    onLogin={registrationRequestState => this.setRegistrationRequest(registrationRequestState)}
+                                />
                             )
                         }} />
 
@@ -168,7 +171,7 @@ export class MainView extends React.Component {
                             if (!user) return <Redirect to="/" />
                             return <Col xs={12} md={8}>
                                 <MovieView
-                                    movieData={movies.find(m => m._id === match.params.movieId)}
+                                    movies={movies.find(m => m._id === match.params.movieId)}
                                     onAddClick={() => { this.addToFavorite(match.params.movieId); }}
                                     onBackClick={() => history.goBack()}
                                 />
@@ -179,7 +182,10 @@ export class MainView extends React.Component {
                             if (!user) return <Redirect to="/" />
                             if (movies.length === 0) return <div className="main-view" />;
                             return <Col xs={12} md={8}>
-                                <DirectorView directorData={movies.find(m => m.Director.Name === match.params.name).Director} onBackClic={() => history.goBack()} />
+                                <DirectorView
+                                    directorData={movies.find(m => m.Director.Name === match.params.name).Director}
+                                    onBackClic={() => history.goBack()}
+                                />
                             </Col>
                         }} />
 
@@ -187,7 +193,10 @@ export class MainView extends React.Component {
                             if (!user) return <Redirect to="/" />
                             if (movies.length === 0) return <div className="main-view" />;
                             return <Col xs={12} md={8}>
-                                <GenreView Genre={movies.find(m => m.Genre.Name === match.params.name).Genre} onBackClick={() => history.goBack()} />
+                                <GenreView
+                                    Genre={movies.find(m => m.Genre.Name === match.params.name).Genre}
+                                    onBackClick={() => history.goBack()}
+                                />
                             </Col>
                         }} />
 
@@ -196,7 +205,7 @@ export class MainView extends React.Component {
                             return <Col xs={12} md={8}>
                                 <ProfileView
                                     userData={userData}
-                                    movieData={movies}
+                                    movies={movies}
                                     onDelete={() => this.onLoggedOut()}
                                     onBackClick={() => history.goBack()}
                                 />
@@ -209,3 +218,14 @@ export class MainView extends React.Component {
     }
 }
 
+let mapStatetoProps = state => {
+    return {
+        movies: state.movies,
+    }
+}
+
+// let mapDispatchToProps = dispatch => {
+//     return { setMovies: () => dispatch(setMovies()) }
+// }
+
+export default connect(mapStatetoProps, { setMovies })(MainView);

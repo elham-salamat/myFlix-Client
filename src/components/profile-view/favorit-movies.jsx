@@ -5,9 +5,9 @@ import axios from 'axios';
 
 import './profile-view.scss';
 
-export function FavoriteMovies({ user, movieData }) {
+export function FavoriteMovies({ user, movies }) {
 
-    const [favoriteMovies, setFavoriteMovies] = useState(movieData.filter((movie) => user.FavoriteMovies.includes(movie._id)));
+    const [favoriteMovies, setFavoriteMovies] = useState(movies.filter((movie) => user.FavoriteMovies.includes(movie._id)));
 
     function handleMyFavotite(movieId) {
 
@@ -22,7 +22,7 @@ export function FavoriteMovies({ user, movieData }) {
             .then(response => {
                 alert('Are you sure about deleting this movie?');
                 let currentFavorites = response.data.FavoriteMovies;
-                setFavoriteMovies(movieData.filter((movie) => currentFavorites.includes(movie._id)));
+                setFavoriteMovies(movies.filter((movie) => currentFavorites.includes(movie._id)));
             })
             .catch(error => {
                 console.log(error);
