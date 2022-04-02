@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Col, Row, Button } from 'react-bootstrap';
-// import PropTypes from 'prop-types';
 
 import './movie-view.scss';
 
@@ -51,26 +50,4 @@ export class MovieView extends React.Component {
     }
 }
 
-// MovieView.propTypes = {
-//     movieData: PropTypes.shape({
-//         Title: PropTypes.string.isRequired,
-//         Description: PropTypes.string.isRequired,
-//         ImagePath: PropTypes.string,
-//         ReleasedYear: PropTypes.number,
-//         Country: PropTypes.array,
-//         Featured: PropTypes.bool,
-//         Rating: PropTypes.number,
-//         Genre: PropTypes.shape({
-//             Name: PropTypes.string.isRequired,
-//             Description: PropTypes.string.isRequired
-//         }),
-//         Director: PropTypes.shape({
-//             Name: PropTypes.string.isRequired,
-//             Bio: PropTypes.string.isRequired,
-//             BirthYear: PropTypes.number.isRequired,
-//             DeathYear: PropTypes.number,
-//         })
-//     }).isRequired,
-
-// }
 

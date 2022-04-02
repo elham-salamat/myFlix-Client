@@ -1,20 +1,22 @@
 import React from 'react';
-import { Row, Col, Navbar, Nav, Button } from 'react-bootstrap';
-import NavbarCollapse from 'react-bootstrap/esm/NavbarCollapse';
+import { useSelector, useDispatch } from 'react-redux';
+import { Col, Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+
+import { signout } from '../../actions/actions';
 
 import logo from './img/logo.jpg';
 import './header-view.scss';
 
 
-export function HeaderView(props) {
+export function HeaderView() {
 
-    const handlesignout = (e) => {
-        e.preventDefault();
-        props.onSignedOut();
-    };
+    const isAuth = useSelector(state => state.login.isAuth);
+    const user = useSelector(state => state.login.user);
 
-    if (props.isAuth) {
+    const dispatch = useDispatch()
+
+    if (isAuth) {
         return (
             <Col className="header" xs={12} md={10} lg={6}>
                 <Navbar collapseOnSelect expand="lg" fixed="top" >
@@ -32,10 +34,10 @@ export function HeaderView(props) {
                                 <Link to="/">Home</Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Link to="/profile">{props.username}</Link>
+                                <Link to="/profile">{user}</Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Link onClick={handlesignout} to="/">Sign out</Link>
+                                <Link onClick={() => dispatch(signout())} to="/">Sign out</Link>
                             </Nav.Item>
                         </Nav>
                     </Navbar.Collapse>
@@ -51,13 +53,10 @@ export function HeaderView(props) {
                     <img
                         src={logo}
                         alt="logo"
-
                     />
                 </Navbar.Brand>
             </Navbar>
         </Col>
 
     )
-
-
 }

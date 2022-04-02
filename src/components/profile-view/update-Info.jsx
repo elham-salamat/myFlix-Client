@@ -1,43 +1,29 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Form, Button, Card, Col } from 'react-bootstrap';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { fetchUser } from '../../actions/actions';
 
 import './profile-view.scss';
 
 export function UpdateForm({ user }) {
-    // const date = new Date(user.Birthday);
-    // const yyyy = date.getFullYear();
-    // let mm = date.getMonth() + 1; // Months start at 0!
-    // let dd = date.getDate();
-
-    // if (dd < 10) dd = '0' + dd;
-    // if (mm < 10) mm = '0' + mm;
-
-    // const userBirthday = mm + '-' + dd + '-' + yyyy;
-
-    // console.log(userBirthday)
 
     const [username, setUsername] = useState(`${user.Username}`);
-    // const [password, setPassword] = useState(`${user.Password}`);
     const [email, setEmail] = useState(`${user.Email} `);
     const [birthday, setBirthday] = useState(`${user.Birthday} `);
     const [nationality, setNationality] = useState(`${user.Nationality} `);
     const [password, setPassword] = useState(928582101);
 
+    let token = useSelector(state => state.login.token);
+    let currentUser = useSelector(state => state.login.user);
+    const dispatch = useDispatch();
+
     // Handling the form submission
     const handleupdate = (e) => {
         e.preventDefault();
-        let token = localStorage.getItem('token');
-        let currentUsername = localStorage.getItem('user');
 
-        // setPassword(928582101);
-        console.log(username);
-        console.log(password);
-        console.log(email);
-        console.log(birthday);
-        console.log(nationality);
-
-        axios.put(`https://movie-app-902522.herokuapp.com/users/${currentUsername}`, {
+        axios.put(`https://movie-app-902522.herokuapp.com/users/${currentUser}`, {
             Username: username,
             Password: password,
             Email: email,
@@ -45,13 +31,13 @@ export function UpdateForm({ user }) {
             Nationality: nationality
         }, {
             headers: {
-
-
                 Authorization: `Bearer ${token}`,
             }
         })
             .then(response => {
                 alert('your info updated successfuly');
+                dispatch(fetchUser(response.data));
+
             })
             .catch(error => {
                 console.log('error updating the user');
@@ -101,14 +87,6 @@ export function UpdateForm({ user }) {
                                 onChange={e => setNationality(e.target.value)}
                             />
                         </Form.Group>
-                        {/* <Form.Group controlId="formPassword">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control
-                                type="password"
-                                value={password}
-                                onChange={e => setPassword(e.target.value)}
-                            />
-                        </Form.Group> */}
                         <Button type="submit" onClick={handleupdate} variant="outline-secondary">update</Button>
                     </Form>
                 </Card.Body >

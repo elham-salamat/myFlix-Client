@@ -1,11 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Col, Button, Card } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { deleteAccount } from '../../actions/actions';
 
 import './profile-view.scss';
 
 export function PersonalInfo({ user }) {
+
+    let token = useSelector(state => state.login.token);
+    const dispatch = useDispatch();
 
     const date = new Date(user.Birthday);
     const yyyy = date.getFullYear();
@@ -17,16 +23,19 @@ export function PersonalInfo({ user }) {
 
     const userBirthday = mm + '/' + dd + '/' + yyyy;
 
+
+
     const handledeleteaccount = (e) => {
         e.preventDefault();
-        let token = localStorage.getItem('token');
 
         axios.delete(`https://movie-app-902522.herokuapp.com/users/${user.Username}`, {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then(response => {
-                console.log(response.data);
-                props.onDelete();
+                alert('Are you sure? if you delete your accout, you cannot have accessibility to our movie database.');
+                dispatch(deleteAccount());
+                window.open('/', '_self');
+
             })
             .catch(error => {
                 console.log(error);
@@ -45,9 +54,7 @@ export function PersonalInfo({ user }) {
                     <Card.Text>{userBirthday}</Card.Text>
                 </Card.Body>
                 <Button onClick={handledeleteaccount} variant="outline-secondary">
-                    <Link to="/">
-                        Delete Account
-                    </Link>
+                    Delete Account
                 </Button>
             </Card>
         </>

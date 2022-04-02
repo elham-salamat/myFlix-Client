@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 
-import { setMovies } from '../../actions/actions';
+import { setMovies, fetchUser } from '../../actions/actions';
 
 import { RegistrationView } from '../registration-view/registration-view';
 import { LoginView } from '../login-view/login-view';
@@ -23,11 +23,6 @@ class MainView extends React.Component {
 
     constructor() {
         super();
-        this.state = {
-            userData: {},
-            user: null,
-            isAuth: false
-        }
     }
 
     getMovies(token) {
@@ -37,10 +32,6 @@ class MainView extends React.Component {
             .then(response => {
                 //Assign the result to the state 
                 this.props.setMovies(response.data);
-                this.setState({
-                    isAuth: true
-                });
-
             })
             .catch(error => {
                 console.log(error);
@@ -51,51 +42,34 @@ class MainView extends React.Component {
         axios.get('https://movie-app-902522.herokuapp.com/users', {
             headers: {
                 Authorization: `Bearer ${token}`,
-                'username': localStorage.getItem('user')
+                'username': this.props.user
             }
         })
             .then(response => {
-                //Assign the result to the state 
-                this.setState({
-                    userData: response.data
-                });
+                //Assign the result to the state
+                this.props.fetchUser(response.data);
             })
             .catch(error => {
                 console.log(error);
             });
     }
 
-
     componentDidMount() {
-        let accessToken = localStorage.getItem('token');
+        let accessToken = this.props.token;
 
         if (accessToken !== null) {
-            this.setState({
-                user: localStorage.getItem('user')
-            });
-            this.setState({
-                isAuth: true
-            });
             this.getMovies(accessToken);
-            this.getUser(accessToken);
         }
     }
 
-
-    onLoggedIn(authData) {
-        this.setState({
-            user: authData.user.Username,
-        });
-        localStorage.setItem('token', authData.token);
-        localStorage.setItem('user', authData.user.Username);
-        this.getMovies(authData.token);
-        this.getUser(authData.token);
+    onLoggedIn() {
+        this.getMovies(this.props.token);
+        this.getUser(this.props.token);
     }
 
     addToFavorite(movieId) {
-        let token = localStorage.getItem('token');
-        let username = localStorage.getItem('user');
-        console.log(token);
+        let token = this.props.token;
+        let username = this.props.user;
         axios.post(`https://movie-app-902522.herokuapp.com/users/${username}/${movieId}`,
             null, {
             headers: {
@@ -113,33 +87,14 @@ class MainView extends React.Component {
 
     }
 
-    getUpdatedFavorites() {
-        let token = localStorage.getItem('token');
-        this.getUser(token);
-    }
-
-    onLoggedOut() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        this.setState({
-            user: null
-        });
-        this.setState({
-            isAuth: false
-        });
-
-    }
-
     render() {
-        let { movies } = this.props;
-        let { user, isAuth, userData } = this.state;
-
+        let { movies, user } = this.props;
 
         return (
             <Router>
                 <>
                     <Row className="justify-content-md-center">
-                        <HeaderView isAuth={isAuth} username={user} onSignedOut={() => this.onLoggedOut()} />
+                        <HeaderView />
                     </Row>
                     <Row className="main-content">
 
@@ -147,7 +102,9 @@ class MainView extends React.Component {
                             /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
                             if (!user) return (
                                 <Col>
-                                    <LoginView onLoggedIn={user => this.onLoggedIn(user)} onRegister={registrationRequestState => this.setRegistrationRequest(registrationRequestState)} isAuth={isAuth} />
+                                    <LoginView
+                                        onLoggedIn={() => this.onLoggedIn()}
+                                    />
                                 </Col>
                             )
 
@@ -160,10 +117,11 @@ class MainView extends React.Component {
                         <Route exact path="/register" render={() => {
                             if (user) return <Redirect to="/" />
                             return (
-                                <RegistrationView
-                                    onSignUp={(newUser) => this.onSignUp(newUser)}
-                                    onLogin={registrationRequestState => this.setRegistrationRequest(registrationRequestState)}
-                                />
+                                <Col>
+                                    <RegistrationView
+                                        onSignUp={(newUser) => this.onSignUp(newUser)}
+                                    />
+                                </Col>
                             )
                         }} />
 
@@ -204,9 +162,7 @@ class MainView extends React.Component {
                             if (!user) return <Redirect to="/" />
                             return <Col xs={12} md={8}>
                                 <ProfileView
-                                    userData={userData}
                                     movies={movies}
-                                    onDelete={() => this.onLoggedOut()}
                                     onBackClick={() => history.goBack()}
                                 />
                             </Col>
@@ -221,11 +177,10 @@ class MainView extends React.Component {
 let mapStatetoProps = state => {
     return {
         movies: state.movies,
+        user: state.login.user,
+        token: state.login.token,
+
     }
 }
 
-// let mapDispatchToProps = dispatch => {
-//     return { setMovies: () => dispatch(setMovies()) }
-// }
-
-export default connect(mapStatetoProps, { setMovies })(MainView);
+export default connect(mapStatetoProps, { setMovies, fetchUser })(MainView);

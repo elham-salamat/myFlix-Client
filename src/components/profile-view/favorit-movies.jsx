@@ -2,17 +2,21 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Col, Row, Button, Figure } from 'react-bootstrap';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
+
 
 import './profile-view.scss';
 
 export function FavoriteMovies({ user, movies }) {
 
     const [favoriteMovies, setFavoriteMovies] = useState(movies.filter((movie) => user.FavoriteMovies.includes(movie._id)));
+    let token = useSelector(state => state.login.token)
+    let username = useSelector(state => state.login.user)
+
 
     function handleMyFavotite(movieId) {
 
-        let token = localStorage.getItem('token');
-        let username = localStorage.getItem('user');
+
 
         axios.delete(`https://movie-app-902522.herokuapp.com/users/${username}/${movieId}`, {
             headers: {
@@ -21,6 +25,7 @@ export function FavoriteMovies({ user, movies }) {
         })
             .then(response => {
                 alert('Are you sure about deleting this movie?');
+
                 let currentFavorites = response.data.FavoriteMovies;
                 setFavoriteMovies(movies.filter((movie) => currentFavorites.includes(movie._id)));
             })

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Form, Button, Card, Row, Col } from 'react-bootstrap';
+
+import { login } from '../../actions/actions';
 
 import './login-view.scss';
 
@@ -12,6 +14,8 @@ export function LoginView(props) {
     const [password, setPassword] = useState('');
     const [usernameErr, setUsernameErr] = useState('');
     const [passwordErr, setPasswordErr] = useState('');
+
+    const dispatch = useDispatch();
 
     //validate user inputs
     const validate = () => {
@@ -46,14 +50,15 @@ export function LoginView(props) {
             })
                 .then(response => {
                     const data = response.data;
-                    console.log(data);
-                    props.onLoggedIn(data);
+                    dispatch(login(response.data.token, response.data.user.Username));
+                    props.onLoggedIn();
                 })
                 .catch(error => {
                     console.log('no such user')
                 });
         }
     };
+
 
     return (
         <>
@@ -114,5 +119,4 @@ export function LoginView(props) {
         </>
     )
 }
-
 

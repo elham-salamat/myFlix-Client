@@ -1,5 +1,6 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 
 import { FavoriteMovies } from './favorit-movies';
 import { UpdateForm } from './update-Info';
@@ -9,8 +10,7 @@ import './profile-view.scss';
 
 export function ProfileView(props) {
 
-    const user = props.userData;
-    // console.log(user);
+    const user = useSelector(state => state.fetchUser);
 
     return (
         <>
