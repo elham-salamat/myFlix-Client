@@ -9,9 +9,19 @@ import './profile-view.scss';
 
 export function UpdateForm({ user }) {
 
+    const date = new Date(user.Birthday);
+    const yyyy = date.getFullYear();
+    let mm = date.getMonth() + 1; // Months start at 0!
+    let dd = date.getDate();
+
+    if (dd < 10) dd = '0' + dd;
+    if (mm < 10) mm = '0' + mm;
+
+    const userBirthday = mm + '-' + dd + '-' + yyyy;
+
     const [username, setUsername] = useState(`${user.Username}`);
     const [email, setEmail] = useState(`${user.Email} `);
-    const [birthday, setBirthday] = useState(`${user.Birthday} `);
+    const [birthday, setBirthday] = useState(`${userBirthday} `);
     const [nationality, setNationality] = useState(`${user.Nationality} `);
     const [password, setPassword] = useState(928582101);
 
