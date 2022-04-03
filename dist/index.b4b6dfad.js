@@ -36832,16 +36832,9 @@ var _profileViewScss = require("./profile-view.scss");
 var _s = $RefreshSig$();
 function UpdateForm({ user  }) {
     _s();
-    const date = new Date(user.Birthday);
-    const yyyy = date.getFullYear();
-    let mm = date.getMonth() + 1; // Months start at 0!
-    let dd = date.getDate();
-    if (dd < 10) dd = '0' + dd;
-    if (mm < 10) mm = '0' + mm;
-    const userBirthday = mm + '-' + dd + '-' + yyyy;
     const [username, setUsername] = _react.useState(`${user.Username}`);
     const [email, setEmail] = _react.useState(`${user.Email} `);
-    const [birthday, setBirthday] = _react.useState(`${userBirthday} `);
+    const [birthday, setBirthday] = _react.useState(`${user.Birthday} `);
     const [nationality, setNationality] = _react.useState(`${user.Nationality} `);
     const [password, setPassword] = _react.useState(928582101);
     let token = _reactRedux.useSelector((state)=>state.login.token
@@ -36879,7 +36872,7 @@ function UpdateForm({ user  }) {
                     children: "Update Your Information"
                 }, void 0, false, {
                     fileName: "src/components/profile-view/update-Info.jsx",
-                    lineNumber: 60,
+                    lineNumber: 50,
                     columnNumber: 17
                 }, this),
                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Card.Body, {
@@ -36892,7 +36885,7 @@ function UpdateForm({ user  }) {
                                         children: "Username"
                                     }, void 0, false, {
                                         fileName: "src/components/profile-view/update-Info.jsx",
-                                        lineNumber: 64,
+                                        lineNumber: 54,
                                         columnNumber: 29
                                     }, this),
                                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Form.Control, {
@@ -36903,13 +36896,13 @@ function UpdateForm({ user  }) {
                                         required: true
                                     }, void 0, false, {
                                         fileName: "src/components/profile-view/update-Info.jsx",
-                                        lineNumber: 65,
+                                        lineNumber: 55,
                                         columnNumber: 29
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/profile-view/update-Info.jsx",
-                                lineNumber: 63,
+                                lineNumber: 53,
                                 columnNumber: 25
                             }, this),
                             /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Form.Group, {
@@ -36919,7 +36912,7 @@ function UpdateForm({ user  }) {
                                         children: "Email"
                                     }, void 0, false, {
                                         fileName: "src/components/profile-view/update-Info.jsx",
-                                        lineNumber: 75,
+                                        lineNumber: 65,
                                         columnNumber: 29
                                     }, this),
                                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Form.Control, {
@@ -36930,13 +36923,13 @@ function UpdateForm({ user  }) {
                                         required: true
                                     }, void 0, false, {
                                         fileName: "src/components/profile-view/update-Info.jsx",
-                                        lineNumber: 76,
+                                        lineNumber: 66,
                                         columnNumber: 29
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/profile-view/update-Info.jsx",
-                                lineNumber: 74,
+                                lineNumber: 64,
                                 columnNumber: 25
                             }, this),
                             /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Form.Group, {
@@ -36946,7 +36939,7 @@ function UpdateForm({ user  }) {
                                         children: "Birthday"
                                     }, void 0, false, {
                                         fileName: "src/components/profile-view/update-Info.jsx",
-                                        lineNumber: 84,
+                                        lineNumber: 74,
                                         columnNumber: 29
                                     }, this),
                                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Form.Control, {
@@ -36957,13 +36950,13 @@ function UpdateForm({ user  }) {
                                         required: true
                                     }, void 0, false, {
                                         fileName: "src/components/profile-view/update-Info.jsx",
-                                        lineNumber: 85,
+                                        lineNumber: 75,
                                         columnNumber: 29
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/profile-view/update-Info.jsx",
-                                lineNumber: 83,
+                                lineNumber: 73,
                                 columnNumber: 25
                             }, this),
                             /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Form.Group, {
@@ -36973,7 +36966,7 @@ function UpdateForm({ user  }) {
                                         children: "Nationality"
                                     }, void 0, false, {
                                         fileName: "src/components/profile-view/update-Info.jsx",
-                                        lineNumber: 93,
+                                        lineNumber: 83,
                                         columnNumber: 29
                                     }, this),
                                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Form.Control, {
@@ -36982,13 +36975,13 @@ function UpdateForm({ user  }) {
                                         onChange: (e)=>setNationality(e.target.value)
                                     }, void 0, false, {
                                         fileName: "src/components/profile-view/update-Info.jsx",
-                                        lineNumber: 94,
+                                        lineNumber: 84,
                                         columnNumber: 29
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/profile-view/update-Info.jsx",
-                                lineNumber: 92,
+                                lineNumber: 82,
                                 columnNumber: 25
                             }, this),
                             /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Button, {
@@ -36998,33 +36991,33 @@ function UpdateForm({ user  }) {
                                 children: "update"
                             }, void 0, false, {
                                 fileName: "src/components/profile-view/update-Info.jsx",
-                                lineNumber: 100,
+                                lineNumber: 90,
                                 columnNumber: 25
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/profile-view/update-Info.jsx",
-                        lineNumber: 62,
+                        lineNumber: 52,
                         columnNumber: 21
                     }, this)
                 }, void 0, false, {
                     fileName: "src/components/profile-view/update-Info.jsx",
-                    lineNumber: 61,
+                    lineNumber: 51,
                     columnNumber: 17
                 }, this)
             ]
         }, void 0, true, {
             fileName: "src/components/profile-view/update-Info.jsx",
-            lineNumber: 59,
+            lineNumber: 49,
             columnNumber: 13
         }, this)
     }, void 0, false, {
         fileName: "src/components/profile-view/update-Info.jsx",
-        lineNumber: 58,
+        lineNumber: 48,
         columnNumber: 9
     }, this));
 }
-_s(UpdateForm, "5tE66OrUTAf+FE3D51QnnKZkL/U=", false, function() {
+_s(UpdateForm, "xoxplnvO9PnUXr+l6d7kmjj76sw=", false, function() {
     return [
         _reactRedux.useSelector,
         _reactRedux.useSelector,
