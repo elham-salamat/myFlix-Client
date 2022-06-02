@@ -1,64 +1,74 @@
-// * {
-//     box-sizing: border-box;
-// }
+.register {
+    margin-top: 100px;
+    margin-bottom: 25px;
+    text-align: center;
 
-// body {
-//     font-size: 18px;
-//     margin: 0;
-// }
+    .card {
+        border: #00004d 1px solid;
+        position: relative;
 
-// .signup-page {
-//     display: grid;
-//     grid-template-columns: 3fr 1fr;
-//     background-color: #fff;
-//     height: 100vh;
-// }
+        .card-body {
+            padding: 25px;
+            color: #00004d;
 
-// .main {
-//     background-color: inherit;
-//     color: #00004d;
-// }
+            .card-title {
+                font-size: 20px;
+                padding: 5px;
+                margin-bottom: 30px;
+            }
 
-// .logo {
-//     margin: 0;
-//     padding: 15px 20px;
-// }
+            .card-subtitle {
+                font-weight: normal;
+                font-size: 17px;
+            }
 
-// .content {
-//     text-align: center;
-// }
+            .social-media {
+                font-size: 25px;
+                margin: 15px;
+                margin-top: 30px;
+                color: #00004d;
 
-// .content h1 {
-//     margin-top: 150px;
-// }
+                i {
+                    margin: 15px auto;
+                }
+            }
 
-// .content i {
-//     font-size: 28px;
-//     margin: 10px;
-// }
+            p {
+                font-weight: bold;
+            }
 
-// .line-through {
-//     text-decoration: line-through;
-// }
+            form {
+                margin: 0 10px;
+                text-align: left;
 
-// .signup-form {
-//     max-width: 30%;
-//     margin: 20px auto;
-// }
+                label {
+                    margin-top: 15px;
+                    margin-bottom: 5px;
+                    padding-left: 5px;
+                }
 
-// form input,
-// form button {
-//     margin: 5px;
-//     width: 100%;
-//     padding: 5px;
-// }
+                button {
+                    width: 100%;
+                    margin-top: 20px;
+                    background-color: #002266;
+                    border: #00004d 1px solid;
+                    color: #fff;
+                    font-weight: bold;
+                    padding: 0;
+                    height: 2.5rem;
+                }
+            }
 
-// .login {
-//     background-color: #00004d;
-//     color: #fff;
-//     text-align: center;
-// }
+            button:last-child {
+                margin-top: 10px;
+            }
 
-// .login h2 {
-//     margin: 350px auto 20px auto;
-// }
+            .link-to-login {
+                font-weight: normal;
+                color: #002266;
+                margin-top: 25px;
+                margin-bottom: 0;
+            }
+        }
+    }
+}

@@ -4,39 +4,211 @@
   object-fit: cover;
 }
 
-
-.social-media i {
-  font-size: 25px;
-  margin: 10px;
-  color: #00004d;
-}
-
-.custom-card {
-  border-color: #00004d !important;
-}
-
-.login {
+.register {
+  margin-top: 100px;
+  margin-bottom: 25px;
   text-align: center;
 }
+.register .card {
+  border: #00004d 1px solid;
+  position: relative;
+}
+.register .card .card-body {
+  padding: 25px;
+  color: #00004d;
+}
+.register .card .card-body .card-title {
+  font-size: 20px;
+  padding: 5px;
+  margin-bottom: 30px;
+}
+.register .card .card-body .card-subtitle {
+  font-weight: normal;
+  font-size: 17px;
+}
+.register .card .card-body .social-media {
+  font-size: 25px;
+  margin: 15px;
+  margin-top: 30px;
+  color: #00004d;
+}
+.register .card .card-body .social-media i {
+  margin: 15px auto;
+}
+.register .card .card-body p {
+  font-weight: bold;
+}
+.register .card .card-body form {
+  margin: 0 10px;
+  text-align: left;
+}
+.register .card .card-body form label {
+  margin-top: 15px;
+  margin-bottom: 5px;
+  padding-left: 5px;
+}
+.register .card .card-body form button {
+  width: 100%;
+  margin-top: 20px;
+  background-color: #002266;
+  border: #00004d 1px solid;
+  color: #fff;
+  font-weight: bold;
+  padding: 0;
+  height: 2.5rem;
+}
+.register .card .card-body button:last-child {
+  margin-top: 10px;
+}
+.register .card .card-body .link-to-login {
+  font-weight: normal;
+  color: #002266;
+  margin-top: 25px;
+  margin-bottom: 0;
+}
+.login {
+  margin-top: 100px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+.login .card {
+  border: #00004d 1px solid;
+  position: relative;
+}
+.login .card .card-body {
+  padding: 25px;
+  color: #00004d;
+}
+.login .card .card-body .card-title {
+  font-size: 20px;
+  padding: 5px;
+  margin-bottom: 30px;
+}
+.login .card .card-body .card-subtitle {
+  font-weight: normal;
+  font-size: 17px;
+}
+.login .card .card-body .social-media {
+  font-size: 25px;
+  margin: 15px;
+  margin-top: 30px;
+  color: #00004d;
+}
+.login .card .card-body .social-media i {
+  margin: 15px auto;
+}
+.login .card .card-body p {
+  font-weight: bold;
+}
+.login .card .card-body form {
+  margin: 0 10px;
+  text-align: left;
+}
+.login .card .card-body form label {
+  margin-top: 15px;
+  margin-bottom: 5px;
+  padding-left: 5px;
+}
+.login .card .card-body form button {
+  width: 100%;
+  margin: 20px auto 5px auto;
+  background-color: #002266;
+  border: #00004d 1px solid;
+  color: #fff;
+  font-weight: bold;
+  padding: 0;
+  height: 2.5rem;
+}
+.login .card .card-body .reset-password {
+  text-decoration: none;
+  color: #002266;
+}
 
-.line-through {
+.seperator {
+  text-align: center;
+}
+.seperator .line-through {
   text-decoration: line-through;
 }
 
-.login-form {
-  text-align: left;
+.register button {
+  width: 100%;
+  margin: 20px auto 5px auto;
+  background-color: #002266;
+  border: #00004d 1px solid;
+  color: #fff;
+  font-weight: bold;
+  padding: 0;
+  height: 2.5rem;
 }
-
-.login-form .label {
-  margin-top: 15px;
-  margin-bottom: 5px;
+.register a {
+  text-decoration: none;
+  color: #fff;
 }
-
-Form.button {
-  margin-top: 50px !important;
+.header {
+  height: 90px;
+  position: relative;
+  background-color: #fff;
 }
-
-.main {
+.header nav {
+  position: absolute;
+}
+.header a {
+  margin: 5px auto auto 15px;
+}
+.header a img {
+  width: 60px;
+  height: 50px;
+}
+.header .nav-item a {
+  text-decoration: none;
+  font-size: 18px;
   color: #00004d;
 }
+
+.header-logo {
+  height: 90px;
+  background-color: #fff;
+  margin: 10px auto;
+}
+.fav-movie {
+  margin-bottom: 25px;
+}
+.fav-movie .figure {
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  white-space: nowrap;
+}
+.fav-movie .figure img {
+  height: 400px;
+}
+
+.personal-info {
+  margin-bottom: 25px;
+  color: #00004d;
+}
+.personal-info .card {
+  padding: 15px;
+}
+.personal-info .h5 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+.personal-info .card-img {
+  width: 75%;
+  margin: 0 auto;
+}
+.main-content {
+  margin-top: 100px;
+}
+
+.film-card {
+  margin-bottom: 25px;
+}
+.film-card .card {
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+}
+
 /*# sourceMappingURL=index.e3f97e84.css.map */

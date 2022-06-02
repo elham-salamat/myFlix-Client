@@ -1,14 +1,25 @@
 import React, { useState } from 'react';
+<<<<<<< HEAD
 import { Form, Button, Card, Container, Row, Col } from 'react-bootstrap';
+=======
+import { useDispatch } from 'react-redux';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { Form, Button, Card, Row, Col } from 'react-bootstrap';
+
+import { login } from '../../actions/actions';
+>>>>>>> react-redux
 
 import './login-view.scss';
 
 export function LoginView(props) {
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [usernameErr, setUsernameErr] = useState('');
     const [passwordErr, setPasswordErr] = useState('');
-    const [register, setRegister] = useState(true);
+
+    const dispatch = useDispatch();
 
     //validate user inputs
     const validate = () => {
@@ -43,7 +54,8 @@ export function LoginView(props) {
             })
                 .then(response => {
                     const data = response.data;
-                    props.onLoggedIn(data);
+                    dispatch(login(response.data.token, response.data.user.Username));
+                    props.onLoggedIn();
                 })
                 .catch(error => {
                     console.log('no such user')
@@ -51,20 +63,19 @@ export function LoginView(props) {
         }
     };
 
-    const handleregister = (e) => {
-        console.log(register);
-        e.preventDefault();
-        console.log(props.onRegister(register));
-    };
 
     return (
+<<<<<<< HEAD
         <Col sm={12} md={4}>
+=======
+        <>
+>>>>>>> react-redux
             <Row className="justify-content-sm-center">
-                <Col>
-                    <Card className="custom-card">
-                        <Card.Body className="login">
+                <Col className="login" xs={12} md={8} lg={6}>
+                    <Card>
+                        <Card.Body>
                             <Card.Title>Login To MyFlix</Card.Title>
-                            <Card.Subtitle>Login using social networks</Card.Subtitle>
+                            <Card.Subtitle>Login by social networks</Card.Subtitle>
                             <Card.Link className="social-media" href="#"><i className="fa fa-linkedin-square"></i></Card.Link>
                             <Card.Link className="social-media" href="#"><i className="fa fa-google-plus-square"></i></Card.Link>
                             <Card.Link className="social-media" href="#"><i className="fa fa-facebook-square"></i></Card.Link>
@@ -78,6 +89,7 @@ export function LoginView(props) {
                                         value={username}
                                         onChange={e => setUsername(e.target.value)}
                                     />
+                                    {usernameErr && <p>{usernameErr}</p>}
                                 </Form.Group>
                                 <Form.Group controlId="formPassword">
                                     <Form.Label className="label">Password</Form.Label>
@@ -87,29 +99,36 @@ export function LoginView(props) {
                                         value={password}
                                         onChange={e => setPassword(e.target.value)}
                                     />
+                                    {passwordErr && <p>{passwordErr}</p>}
                                 </Form.Group>
-                                <Button className="button" type="submit" onClick={handlelogin}>Log In</Button>
+                                <Button className="button" type="submit" onClick={handlelogin}>Login</Button>
                             </Form>
-                            <Card.Link href="#">Forget your password?</Card.Link>
-
+                            <Card.Link className="reset-password" href="#">Forget your password?</Card.Link>
                         </Card.Body>
-
                     </Card>
                 </Col>
             </Row>
             <Row className="justify-content-sm-center">
-                <Col sm={12} md={6}>
+                <Col className="seperator" xs={12} md={8} lg={6}>
                     <span className='line-through'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                     <span>&nbsp;</span><span>New to MyFlix</span><span>&nbsp;</span>
                     <span className='line-through'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                 </Col>
             </Row>
             <Row className="justify-content-sm-center">
-                <Col sm={12} md={6}>
-                    <Button type="submit" value={register} onClick={handleregister} variant="outline-secondary">Register</Button>
+                <Col className="register" xs={12} md={8} lg={6}>
+                    <Button variant="outline-secondary">
+                        <Link to="/register">
+                            Register
+                        </Link>
+                    </Button>
                 </Col>
             </Row >
+<<<<<<< HEAD
         </Col>
+=======
+        </>
+>>>>>>> react-redux
     )
 }
 
