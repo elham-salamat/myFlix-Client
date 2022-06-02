@@ -22846,10 +22846,10 @@ class MainView extends _reactDefault.default.Component {
         });
     }
     getUser(token) {
-        _axiosDefault.default.get('https://movie-app-902522.herokuapp.com/users', {
+        let username = this.props.user;
+        _axiosDefault.default.get(`https://movie-app-902522.herokuapp.com/users/${username}`, {
             headers: {
-                Authorization: `Bearer ${token}`,
-                'username': this.props.user
+                Authorization: `Bearer ${token}`
             }
         }).then((response)=>{
             //Assign the result to the state

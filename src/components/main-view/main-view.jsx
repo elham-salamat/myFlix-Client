@@ -39,10 +39,10 @@ class MainView extends React.Component {
     }
 
     getUser(token) {
-        axios.get('https://movie-app-902522.herokuapp.com/users', {
+        let username = this.props.user
+        axios.get(`https://movie-app-902522.herokuapp.com/users/${username}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
-                'username': this.props.user
             }
         })
             .then(response => {
