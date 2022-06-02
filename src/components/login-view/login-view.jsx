@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
-<<<<<<< HEAD
-import { Form, Button, Card, Container, Row, Col } from 'react-bootstrap';
-=======
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Form, Button, Card, Row, Col } from 'react-bootstrap';
 
 import { login } from '../../actions/actions';
->>>>>>> react-redux
 
 import './login-view.scss';
 
@@ -65,11 +61,7 @@ export function LoginView(props) {
 
 
     return (
-<<<<<<< HEAD
-        <Col sm={12} md={4}>
-=======
         <>
->>>>>>> react-redux
             <Row className="justify-content-sm-center">
                 <Col className="login" xs={12} md={8} lg={6}>
                     <Card>
@@ -124,11 +116,7 @@ export function LoginView(props) {
                     </Button>
                 </Col>
             </Row >
-<<<<<<< HEAD
-        </Col>
-=======
         </>
->>>>>>> react-redux
     )
 }
 
